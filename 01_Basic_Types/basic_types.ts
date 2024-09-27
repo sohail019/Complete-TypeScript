@@ -88,6 +88,26 @@ console.log("Hello");
 function def():never{
     while(true){}
 }
-def()
+// def()
 console.log("Hello");
+
+//* Type Interference(Type ka automatic andaza lagana)
+//?  TypeScript mein agar ham directly kisi variable ko initialize karte h bina uska type specify kiye, to TypeScript khud andaza laga leta hai ki is variable ka type kya hoga. Is process ko Type Inference kehte hain.
+
+let a = 10
+let b = true
+let c = "Sohail"
+
+//* Type Annotations - (Type ka manually declare karna)
+// ? Kabhi-kabhi hamein TypeScript ko specifically batana padta hai ki kis type ka data ek variable hold karega. Isse ham manually type define kar sakte h using Type Annotations. Yeh useful hota hai jab ham variable ko pehle declare karte h aur baad mein usko value assign karte h, ya jab TypeScript ko correctly infer karna mushkil ho.
+
+let d: number = 10
+let e: boolean = true
+let f: string = "Sohail"
+
+//? Ham isey function ke parameter aur uske return ke lie bhi use kr skte hai
+
+function xyz(a:number, b:number): number {
+    return a + b
+}
 
