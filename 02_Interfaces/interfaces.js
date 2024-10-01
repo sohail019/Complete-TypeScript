@@ -29,3 +29,26 @@ let anythingg;
 function anythinggg(obj) { }
 anythinggg("sohail");
 anythinggg(98);
+function getUser(obj) {
+    obj.getUserDetails("Sohail");
+}
+let emp = {
+    name: "Sohail",
+    employeeID: 123
+};
+let empAlias = {
+    name: "Sohail",
+    employeeID: 123
+};
+let userDetail = {
+    name: "Sohail",
+    age: 22,
+    isMarried: false
+};
+//! Error: Duplicate Identifier: EmployeeDetails
+// type EmployeeDetails = {
+//     age: number
+// }
+//* When to Use What??
+//todo: Interfaces ko use kar sakte hai jab hamein mostly objects ke structure ko define karna hai, aur inhertitance ka feature chahiye..
+//todo: Type Aliases ko use kar sakte hai jab hamein complex types ya non object types define karne hai jasie union types, primitive types ya tuples
