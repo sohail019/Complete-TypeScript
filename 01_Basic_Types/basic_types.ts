@@ -110,4 +110,3 @@ let f: string = "Sohail"
 function xyz(a:number, b:number): number {
     return a + b
 }
-

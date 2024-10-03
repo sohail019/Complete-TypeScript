@@ -162,3 +162,12 @@ let userr2 = new Userr("Sohrab", 21) //! It will give an error because of missin
 //? We can make gender parameter as optional by adding ? in front of it
 //* Now it will work
 console.log(userr2);
+
+
+//* Static Members
+
+class MyLibrary {
+    static version:number =  1.0;
+}
+
+console.log(MyLibrary.version)
