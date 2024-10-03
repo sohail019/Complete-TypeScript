@@ -82,6 +82,7 @@ class MacMaker extends LaptopMaker {
 
     getValue(){
         console.log(this.name, this.hp)
+        //! Property "hp" is private and only accessible withing class "LaptopMaker"
     }
 }
 
@@ -106,7 +107,7 @@ bis.changing()
 console.log(bis)
 bis.name = "Oreo"
 console.log(bis)
-//! It will give an instruction by typescript that this is not allowed.. but it got run without error.
+//! It will give an instruction by typescript that this Property "name" is private and only accessible withing class "BiscuitMaker"
 
 
 // ? protected
@@ -130,4 +131,34 @@ let mob = new IOSMObileMaker("IPhone")
 console.log(mob)
 
 mob.name = "Samsung"
+//! It will give an instruction by typescript that Property name is protected and only accessible within class "IOSMobileMaker" and it's subclass
 console.log(mob)
+
+
+//* Read Only Properties
+class User {
+    constructor(public readonly name:string){}
+    //! Here, it will give and error of All Declaratations of "name" must have identical modifiers 
+
+    changeName(){
+        this.name = "HAHAHAH"
+    }
+}
+
+let user1 = new User("Sohail")
+console.log(user1)
+user1.changeName()
+console.log(user1)
+
+//* Optional Parameter
+
+class Userr {
+    constructor(public name:string, public age:number, public gender?:string){}
+}
+
+let userr1 = new Userr("Sohail", 22, "Male")
+console.log(userr1)
+let userr2 = new Userr("Sohrab", 21) //! It will give an error because of missing "gender" parameter
+//? We can make gender parameter as optional by adding ? in front of it
+//* Now it will work
+console.log(userr2);
