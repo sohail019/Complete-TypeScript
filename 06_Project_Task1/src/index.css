@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light Theme */
+:root {
+  --background-color: #f0f0f0;
+  --text-color: #1c1c1c;
+  --primary-color: #f25f3a;
+  --secondary-color: #7a899c;
+}
+
+/* Dark Theme */
+.dark {
+  --background-color: #1c1e26;
+  --text-color: #fafafa;
+  --primary-color: #f97b5b;
+  --secondary-color: #7a899c;
+}
+
+/* Apply them globally */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1 {
+  color: var(--primary-color);
+}
+
+p {
+  color: var(--secondary-color);
+}
+
+
+@layer components{
+  .input-class{
+    @apply bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
+  }
+}
