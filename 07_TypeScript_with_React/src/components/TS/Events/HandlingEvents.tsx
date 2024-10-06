@@ -9,8 +9,9 @@ export const HandlingEvents: React.FC = () => {
 
   return (
     <>
+    <h1>Event Handling</h1>
       <button onClick={handleClick}>{
-        text ? "Button Clicked" : "Click Me (Handling Events)"
+        text ? "Button Clicked" : "Click Me"
       }</button>
     </>
   );

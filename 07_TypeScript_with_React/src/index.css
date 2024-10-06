@@ -1,0 +1,25 @@
+body{
+    background-color: #ccc
+}
+
+div#root{
+    text-align: center;
+}
+
+h1{
+    color: teal;
+}
+
+hr{
+    height: 2px;
+    background-color: #116466;
+}
+
+button{
+    background-color: #116466;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -6,8 +6,8 @@ export const State: React.FC = () => {
     const [count, setCount] = useState<number>(0)
   return (
     <>
-        <h1>Count - {count}</h1>
-        <button onClick={() => setCount((prev) => prev + 1)}>Increase Count</button>
+        <h1>State in TS</h1>
+        <button onClick={() => setCount((prev) => prev + 1)}>Increase Count - {count}</button>
     </>
   )
 }

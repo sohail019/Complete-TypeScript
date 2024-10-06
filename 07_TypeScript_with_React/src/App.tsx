@@ -1,4 +1,5 @@
-import { HandlingEvents } from "./components/TS/HandlingEvents"
+import { FormHandling } from "./components/TS/Events/FormHandling"
+import { HandlingEvents } from "./components/TS/Events/HandlingEvents"
 import { Greeting } from "./components/TS/Props"
 import { State } from "./components/TS/State"
 
@@ -7,8 +8,12 @@ export const App = () => {
     <>
     {/* <Greeting name="Sohail " /> */}
     <Greeting name="Sohail Shaikh" age={22} />
+    <hr />
     <State /> <br /> <br />
+    <hr />
     <HandlingEvents />
+    <hr />
+    <FormHandling />
     </>
   )
 }

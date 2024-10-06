@@ -12,7 +12,8 @@ export const Greeting: React.FC<GreetingProps> = ({name, age}) => {
 
   return (
     <div>
-      <h1>Hello {name}, Your Age is {age}</h1>
+      <h1>Props in TS</h1>
+      <h4>Hello {name}, Your Age is {age}</h4>
     </div>
   )
 }
