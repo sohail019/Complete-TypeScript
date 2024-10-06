@@ -19,15 +19,17 @@ export const FormSubmit: React.FC = () => {
     }
   return (
     <form onSubmit={handleForm}>
-        <input type="text" value={inputValue} placeholder='Enter Value' onChange={handleChange} />
-        <button type="submit">Submit</button>
-        {/* <p>Input Value: {inputValue}</p>  */}
-        {
-            inputValue ? <p>Input Value: {inputValue}</p> : null
-        }
-        {
-            formValue ? <p>Form Value: {formValue}</p> : null
-        }
+      <h1>Form Submit</h1>
+      <input
+        type="text"
+        value={inputValue}
+        placeholder="Enter Value"
+        onChange={handleChange}
+      />
+      <button type="submit">Submit</button>
+      {/* <p>Input Value: {inputValue}</p>  */}
+      {inputValue ? <p>Input Value: {inputValue}</p> : null}
+      {formValue ? <p>Form Value: {formValue}</p> : null}
     </form>
-  )
+  );
 }
