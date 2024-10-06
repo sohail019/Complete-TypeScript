@@ -1,4 +1,5 @@
 import { FormHandling } from "./components/TS/Events/FormHandling"
+import { FormSubmit } from "./components/TS/Events/FormSubmit"
 import { HandlingEvents } from "./components/TS/Events/HandlingEvents"
 import { Greeting } from "./components/TS/Props"
 import { State } from "./components/TS/State"
@@ -14,6 +15,8 @@ export const App = () => {
     <HandlingEvents />
     <hr />
     <FormHandling />
+    <hr />
+    <FormSubmit />
     </>
   )
 }
