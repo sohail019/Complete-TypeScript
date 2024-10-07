@@ -2,6 +2,7 @@ import { FormHandling } from "./components/TS/Events/FormHandling"
 import { FormSubmit } from "./components/TS/Events/FormSubmit"
 import { HandlingEvents } from "./components/TS/Events/HandlingEvents"
 import { InputValidation } from "./components/TS/Events/InputValidation"
+import { UseEffect } from "./components/TS/Hooks/UseEffect"
 import { UseState } from "./components/TS/Hooks/UseState"
 import { Greeting } from "./components/TS/Props"
 import { State } from "./components/TS/State"
@@ -23,6 +24,8 @@ export const App = () => {
     <InputValidation />
     <hr />
     <UseState />
+    <hr />
+    <UseEffect />
     </>
   )
 }
