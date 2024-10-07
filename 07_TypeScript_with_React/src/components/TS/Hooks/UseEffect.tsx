@@ -14,7 +14,8 @@ export const UseEffect: React.FC = () => {
     }, [] )    
   return (
     <>
-        <h1>Timer: {count} Seconds</h1>
+    <h1>useEffect Hook</h1>
+        <h2>Timer: {count} Seconds</h2>
     </>
   )
 }

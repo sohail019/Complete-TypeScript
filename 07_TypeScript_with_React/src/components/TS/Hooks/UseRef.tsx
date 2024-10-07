@@ -12,6 +12,9 @@ export const UseRef:React.FC = () => {
         }
     }, [])
   return (
+    <>
+    <h1>useRef Hook</h1>
     <input ref={inputRef} type='text' placeholder='Focus Me!'></input>
+    </>
   )
 }
