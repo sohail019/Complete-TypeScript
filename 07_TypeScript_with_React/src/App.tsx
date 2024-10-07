@@ -3,6 +3,7 @@ import { FormSubmit } from "./components/TS/Events/FormSubmit"
 import { HandlingEvents } from "./components/TS/Events/HandlingEvents"
 import { InputValidation } from "./components/TS/Events/InputValidation"
 import { AuthProvider, AuthStatus } from "./components/TS/Hooks/AuthContext"
+import { WindowWidthComponent } from "./components/TS/Hooks/Custom/WindowWidthComponent"
 // import { AuthProvider, AuthStatus } from "./components/TS/Hooks/UseContext"
 import { UseEffect } from "./components/TS/Hooks/UseEffect"
 import { UseRef } from "./components/TS/Hooks/UseRef"
@@ -35,6 +36,8 @@ export const App = () => {
     <AuthProvider>
       <AuthStatus />
     </AuthProvider>
+    <hr />
+    <WindowWidthComponent />
     </>
   )
 }
