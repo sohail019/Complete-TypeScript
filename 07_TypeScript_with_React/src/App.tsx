@@ -3,6 +3,7 @@ import { FormSubmit } from "./components/TS/Events/FormSubmit"
 import { HandlingEvents } from "./components/TS/Events/HandlingEvents"
 import { InputValidation } from "./components/TS/Events/InputValidation"
 import { UseEffect } from "./components/TS/Hooks/UseEffect"
+import { UseRef } from "./components/TS/Hooks/UseRef"
 import { UseState } from "./components/TS/Hooks/UseState"
 import { Greeting } from "./components/TS/Props"
 import { State } from "./components/TS/State"
@@ -26,6 +27,8 @@ export const App = () => {
     <UseState />
     <hr />
     <UseEffect />
+    <hr />
+    <UseRef />
     </>
   )
 }
