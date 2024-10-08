@@ -1,13 +1,59 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoMdLock, IoMdMail, IoMdPerson } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../store/store';
+import { registerUser } from '../features/userSlice';
 
-export const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
+export const Signup: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("Regular"); // Default role is Regular
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const id = useId();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const {name, value} = e.target
+
+    if(name === "email") setEmail(value)
+    if(name === "username") setUsername(value)
+    if(name === "password") setPassword(value)
+    if(name === "confirmPassword") setConfirmPassword(value)
+    if(name === "role") setRole(value)
+  }
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    //* Create a new user object and dispatch the registerUser action
+    const newUser = {
+      id,
+      email,
+      username,
+      password,
+      role,
+    };
+
+    dispatch(registerUser(newUser));
+
+    //? Redirect to login page
+    navigate("/login");
   };
   return (
     <section className="flex items-center justify-center ">
@@ -18,7 +64,7 @@ export const Signup = () => {
           </h1>
           <form
             className="mt-4 flex flex-col gap-4"
-            // onSubmit={handleFormSubmit}
+            onSubmit={handleFormSubmit}
           >
             {/* Email */}
             <div className="flex flex-col">
@@ -29,8 +75,9 @@ export const Signup = () => {
                 </div>
                 <input
                   type="email"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
                   required
                   className="input-class"
                   placeholder="email@digitalsalt.in"
@@ -47,8 +94,9 @@ export const Signup = () => {
                 </div>
                 <input
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)}
+                  name="username"
+                  value={username}
+                  onChange={handleChange}
                   required
                   className="input-class"
                   placeholder="Username"
@@ -65,8 +113,9 @@ export const Signup = () => {
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
-                  // value={password}
-                  // onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  name="password"
+                  onChange={handleChange}
                   required
                   className="input-class"
                   placeholder="Password"
@@ -96,8 +145,9 @@ export const Signup = () => {
                 </div>
                 <input
                   type="password"
-                  // value={confirmPassword}
-                  // onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                  name="confirmPassword"
+                  onChange={handleChange}
                   required
                   className="input-class"
                   placeholder="Confirm Password"
@@ -109,8 +159,10 @@ export const Signup = () => {
             <div className="flex flex-col">
               <label className="block mb-2 text-sm font-medium">Role:</label>
               <select
-                // value={role}
-                // onChange={(e) => setRole(e.target.value)}
+                value={role}
+                onChange={handleChange}
+                required
+                name="role"
                 className="input-class"
               >
                 <option value="Regular">Regular</option>
@@ -118,9 +170,9 @@ export const Signup = () => {
               </select>
             </div>
 
-            {/* {error && (
+            {error && (
               <p className="text-red-500 text-center text-sm">{error}</p>
-            )} */}
+            )}
 
             <div className="flex flex-col items-center">
               <button
@@ -131,7 +183,10 @@ export const Signup = () => {
               </button>
               <p className="mt-2 text-sm">
                 Already have an account?
-                <Link to="/login" className=" text-brightRed dark:text-brightRedLight underline ml-2">
+                <Link
+                  to="/login"
+                  className=" text-brightRed dark:text-brightRedLight underline ml-2"
+                >
                   Log in
                 </Link>
                 .

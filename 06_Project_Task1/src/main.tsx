@@ -8,6 +8,8 @@ import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import Hero from "./components/Hero.tsx";
 import { Login } from "./pages/Login.tsx";
 import { Error } from "./pages/Error.tsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +38,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <Provider store={store}>
     <ThemeProvider>
       <RouterProvider router={router} />
     </ThemeProvider>
+    </Provider>
   </StrictMode>
 );
