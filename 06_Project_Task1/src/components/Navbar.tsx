@@ -47,6 +47,9 @@ export const Navbar = () => {
           <Link to="/contact" className="hover:text-brightRed dark:hover:text-brightRedLight">
             Contact
           </Link>
+          <Link to="/default-data" className="hover:text-brightRed dark:hover:text-brightRedLight">
+            Default Data
+          </Link>
           
         </div>
 

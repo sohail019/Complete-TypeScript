@@ -1,7 +1,42 @@
+import React, { useState } from 'react';
 import { IoMdLock, IoMdMail } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppDispatch, RootState } from '../store/store';
+import { loginUser } from '../features/userSlice';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export const Login = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  // ? Access the current user from Redux state to verify login status
+  // const currentUser = useSelector((state: RootState) => state.user.currentUser);
+  const loginError = useSelector((state: RootState) => state.user.error);
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    //? Dispatch login action with entered email and password
+    const resultAction = await dispatch(loginUser({email,password}))
+    
+    if(loginUser.fulfilled.match(resultAction)){
+      navigate("/user-dashboard") //? Redirect to user dashboard
+    } else{
+      setError(loginError || "Invalid Credentials, Please Try Again")
+    }
+  }
+
+    const togglePasswordVisibility = () => {
+      setShowPassword((prev) => !prev);
+    };
 
   return (
     <section className="flex items-center justify-center">
@@ -12,7 +47,7 @@ export const Login = () => {
           </h1>
           <form
             className="mt-6 flex flex-col gap-4"
-            // onSubmit={handleFormSubmit}
+            onSubmit={handleFormSubmit}
           >
             {/* Email */}
             <div className="flex flex-col">
@@ -23,8 +58,8 @@ export const Login = () => {
                 </div>
                 <input
                   type="email"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="input-class"
                   placeholder="email@digitalsalt.in"
@@ -40,28 +75,33 @@ export const Login = () => {
                   <IoMdLock className="text-gray-500" />
                 </div>
                 <input
-                  // type={showPassword ? "text" : "password"}
-                  // value={password}
-                  // onChange={(e) => setPassword(e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   className="input-class"
                   placeholder="Password"
                 />
                 <button
                   type="button"
-                  // onClick={togglePasswordVisibility}
+                  onClick={togglePasswordVisibility}
                   className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer"
                 >
-                  {/* {showPassword ? (
+                  {showPassword ? (
                     <FaEyeSlash className="text-gray-500" />
                   ) : (
                     <FaEye className="text-gray-500" />
-                  )} */}
+                  )}
                 </button>
               </div>
             </div>
 
-            {/* {error && <p className="text-red-500 text-center">{error}</p>} */}
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={(value) => setCaptchaValue(value)}
+            />
+
+            {error && <p className="text-red-500 text-center">{error}</p>}
 
             <div className="flex flex-col items-center">
               <button
@@ -73,7 +113,7 @@ export const Login = () => {
               <p className="mt-2 text-sm">
                 Don't have an account?
                 <Link to="/signup" className="text-orange-700 underline ml-2">
-                  Register
+                  Sign Up
                 </Link>
                 .
               </p>

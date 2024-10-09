@@ -10,6 +10,9 @@ import { Login } from "./pages/Login.tsx";
 import { Error } from "./pages/Error.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import { AdminDashboard } from "./pages/AdminDashboard.tsx";
+import { UserDashboard } from "./pages/UserDashboard.tsx";
+import { DefaultData } from "./pages/DefaultData.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />
+      },
+      {
+        path: "/admin-dashboard",
+        element: <AdminDashboard />
+      },
+      {
+        path: "user-dashboard",
+        element: <UserDashboard />
+      },
+      {
+        path: "default-data",
+        element: <DefaultData />
       },
       {
         path: "*",

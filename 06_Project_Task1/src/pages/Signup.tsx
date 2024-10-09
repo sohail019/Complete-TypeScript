@@ -1,19 +1,21 @@
-import { useId, useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { IoMdLock, IoMdMail, IoMdPerson } from 'react-icons/io';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppDispatch } from '../store/store';
-import { registerUser } from '../features/userSlice';
+import { useId, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { IoMdLock, IoMdMail, IoMdPerson } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../store/store";
+import { registerUser } from "../features/userSlice";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const Signup: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("Regular"); // Default role is Regular
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+const [email, setEmail] = useState("");
+const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+const [role, setRole] = useState<"Admin" | "Regular User">("Regular User");
+const [showPassword, setShowPassword] = useState<boolean>(false);
+const [error, setError] = useState<string>("");
+const [captchaValue, setCaptchaValue] = useState<string | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -23,15 +25,31 @@ export const Signup: React.FC = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
 
-    if(name === "email") setEmail(value)
-    if(name === "username") setUsername(value)
-    if(name === "password") setPassword(value)
-    if(name === "confirmPassword") setConfirmPassword(value)
-    if(name === "role") setRole(value)
-  }
+    switch (name) {
+      case "email":
+        setEmail(value);
+        break;
+      case "username":
+        setUsername(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        break;
+      case "role":
+        setRole(value as "Admin" | "Regular User");
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +59,11 @@ export const Signup: React.FC = () => {
       return;
     }
 
-    //* Create a new user object and dispatch the registerUser action
+    if (!captchaValue) {
+      setError("Please complete the reCAPTCHA");
+      return;
+    }
+
     const newUser = {
       id,
       email,
@@ -51,10 +73,14 @@ export const Signup: React.FC = () => {
     };
 
     dispatch(registerUser(newUser));
-
-    //? Redirect to login page
-    navigate("/login");
+    // Redirect based on user role
+    if (role === "Admin") {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/user-dashboard");
+    }
   };
+
   return (
     <section className="flex items-center justify-center ">
       <div className="flex flex-col lg:flex-row w-full max-w-4xl mx-auto sm:px-40 md:px-64 lg:px-64">
@@ -165,10 +191,16 @@ export const Signup: React.FC = () => {
                 name="role"
                 className="input-class"
               >
-                <option value="Regular">Regular</option>
+                <option value="Regular User">Regular User</option>
                 <option value="Admin">Admin</option>
               </select>
             </div>
+
+            {/* reCAPTCHA */}
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={(value) => setCaptchaValue(value)}
+            />
 
             {error && (
               <p className="text-red-500 text-center text-sm">{error}</p>
@@ -197,4 +229,4 @@ export const Signup: React.FC = () => {
       </div>
     </section>
   );
-}
+};
