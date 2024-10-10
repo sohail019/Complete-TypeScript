@@ -10,7 +10,7 @@ export const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext)!;
 
   return (
-    <nav className="relative container mx-auto p-6">
+    <nav className="relative container mx-auto p-6 border-b-2 border-b-brightRed mb-3">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="pt-2">Project Task 1</div>

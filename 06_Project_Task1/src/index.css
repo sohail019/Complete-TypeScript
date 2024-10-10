@@ -34,6 +34,16 @@ p {
 }
 
 
+.css-1hv8oq8-MuiStepLabel-label {
+  color: black;
+}
+
+.dark .css-1hv8oq8-MuiStepLabel-label {
+  color: white;
+}
+
+
+
 @layer components{
   .input-class{
     @apply bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300

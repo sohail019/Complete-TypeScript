@@ -1,7 +1,6 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import { Chart, ArcElement, Tooltip, Legend, plugins } from "chart.js";
-import { color } from "framer-motion";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 // Register required components for the Pie chart
 Chart.register(ArcElement, Tooltip, Legend);

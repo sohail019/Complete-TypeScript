@@ -12,7 +12,6 @@ export const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -36,6 +35,12 @@ export const Login = () => {
 
     const togglePasswordVisibility = () => {
       setShowPassword((prev) => !prev);
+
+      // if (role === "Admin") {
+      //   navigate("/login");
+      // } else {
+      //   navigate("/user-dashboard");
+      // }
     };
 
   return (
@@ -98,7 +103,6 @@ export const Login = () => {
 
             <ReCAPTCHA
               sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={(value) => setCaptchaValue(value)}
             />
 
             {error && <p className="text-red-500 text-center">{error}</p>}
