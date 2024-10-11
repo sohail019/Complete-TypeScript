@@ -74,10 +74,10 @@ export const Navbar = () => {
             </>
           )}
           <Link
-            to="/contact"
+            to="/formik-yup"
             className="hover:text-brightRed dark:hover:text-brightRedLight"
           >
-            Contact
+            Formik Yup
           </Link>
           <Link
             to="/formik-signup"
