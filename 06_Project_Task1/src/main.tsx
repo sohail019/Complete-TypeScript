@@ -14,6 +14,7 @@ import { persistor, store } from "./store/store.ts";
 import { AdminDashboard } from "./pages/AdminDashboard.tsx";
 import { UserDashboard } from "./pages/UserDashboard.tsx";
 import { DefaultData } from "./pages/DefaultData.tsx";
+import { AdminRoute } from "./routes/AdminRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin-dashboard",
-        element: <AdminDashboard />,
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        )
       },
       {
         path: "user-dashboard",

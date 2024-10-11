@@ -1,13 +1,26 @@
 import { useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { logoutUser } from "../features/userSlice";
 
 export const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext)!;
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
+
+
+  const currentUser = useSelector((state: RootState) => state.user.currentUser)
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    navigate("/login")
+  }
 
   return (
     <nav className="relative container mx-auto p-6 border-b-2 border-b-brightRed mb-3">
@@ -32,34 +45,47 @@ export const Navbar = () => {
 
         {/* Menu Items */}
         <div className="hidden space-x-10 md:flex">
-          <Link to="/" className="hover:text-brightRed dark:hover:text-brightRedLight">
+          <Link
+            to="/"
+            className="hover:text-brightRed dark:hover:text-brightRedLight"
+          >
             Home
           </Link>
-          <Link to="/about" className="hover:text-brightRed dark:hover:text-brightRedLight">
+          <Link
+            to="/about"
+            className="hover:text-brightRed dark:hover:text-brightRedLight"
+          >
             About
           </Link>
-          <Link to="/signup" className="hover:text-brightRed dark:hover:text-brightRedLight">
-            Signup
-          </Link>
-          <Link to="/login" className="hover:text-brightRed dark:hover:text-brightRedLight">
-            Login
-          </Link>
-          <Link to="/contact" className="hover:text-brightRed dark:hover:text-brightRedLight">
+          {!currentUser && (
+            <>
+              <Link
+                to="/signup"
+                className="hover:text-brightRed dark:hover:text-brightRedLight"
+              >
+                Signup
+              </Link>
+              <Link
+                to="/login"
+                className="hover:text-brightRed dark:hover:text-brightRedLight"
+              >
+                Login
+              </Link>
+            </>
+          )}
+          <Link
+            to="/contact"
+            className="hover:text-brightRed dark:hover:text-brightRedLight"
+          >
             Contact
           </Link>
-          <Link to="/default-data" className="hover:text-brightRed dark:hover:text-brightRedLight">
+          <Link
+            to="/default-data"
+            className="hover:text-brightRed dark:hover:text-brightRedLight"
+          >
             Default Data
           </Link>
-          
         </div>
-
-        {/* Button */}
-        {/* <Link
-          to="/login"
-          className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block"
-        >
-          Login
-        </Link> */}
         <div
           onClick={toggleTheme}
           className="hidden p-2 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight cursor-pointer  md:flex items-center"
@@ -89,6 +115,22 @@ export const Navbar = () => {
             {theme === "light" ? "Light Mode" : "Dark Mode"}
           </motion.p>
         </div>
+        {/* Button */}
+        {currentUser ? (
+          <button
+            onClick={handleLogout}
+            className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block"
+          >
+            Login
+          </Link>
+        )}
 
         {/* Hamburger Icon */}
         <button

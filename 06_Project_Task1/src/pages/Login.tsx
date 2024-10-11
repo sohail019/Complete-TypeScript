@@ -26,21 +26,23 @@ export const Login = () => {
     //? Dispatch login action with entered email and password
     const resultAction = await dispatch(loginUser({email,password}))
     
-    if(loginUser.fulfilled.match(resultAction)){
-      navigate("/user-dashboard") //? Redirect to user dashboard
-    } else{
-      setError(loginError || "Invalid Credentials, Please Try Again")
+    if (loginUser.fulfilled.match(resultAction)) {
+      const user = resultAction.payload;
+      console.log("Logged in user:", user);
+
+      // Redirect based on user role
+      if (user.role === "Admin") {
+        navigate("/admin-dashboard"); // Redirect to Admin Dashboard
+      } else {
+        navigate("/user-dashboard"); // Redirect to User Dashboard
+      }
+    } else {
+      setError(loginError || "Invalid Credentials, Please Try Again");
     }
   }
 
     const togglePasswordVisibility = () => {
       setShowPassword((prev) => !prev);
-
-      // if (role === "Admin") {
-      //   navigate("/login");
-      // } else {
-      //   navigate("/user-dashboard");
-      // }
     };
 
   return (
