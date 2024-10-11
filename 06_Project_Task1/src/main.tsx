@@ -15,6 +15,7 @@ import { AdminDashboard } from "./pages/AdminDashboard.tsx";
 import { UserDashboard } from "./pages/UserDashboard.tsx";
 import { DefaultData } from "./pages/DefaultData.tsx";
 import { AdminRoute } from "./routes/AdminRoute.tsx";
+import {SignupForm} from "./formik/SignupForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: "*",
         element: <Error />,
       },
+      {
+        path: "formik-signup",
+        element: <SignupForm />
+      }
     ],
   },
 ]);

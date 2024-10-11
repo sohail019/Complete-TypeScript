@@ -147,7 +147,7 @@ export const Signup: React.FC = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <IoMdMail className="text-brightRed dark:text-brightRedLight" />
+                      <IoMdMail className="input-icon" />
                     </div>
                     <input
                       type="email"
@@ -168,7 +168,7 @@ export const Signup: React.FC = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <IoMdPerson className="text-brightRed dark:text-brightRedLight" />
+                      <IoMdPerson className="input-icon" />
                     </div>
                     <input
                       type="text"
@@ -208,7 +208,7 @@ export const Signup: React.FC = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <IoMdLock className="text-brightRed dark:text-brightRedLight" />
+                      <IoMdLock className="input-icon" />
                     </div>
                     <input
                       type={showPassword ? "text" : "password"}
@@ -225,9 +225,9 @@ export const Signup: React.FC = () => {
                       className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer"
                     >
                       {showPassword ? (
-                        <FaEyeSlash className="text-brightRed dark:text-brightRedLight" />
+                        <FaEyeSlash className="input-icon" />
                       ) : (
-                        <FaEye className="text-brightRed dark:text-brightRedLight" />
+                        <FaEye className="input-icon" />
                       )}
                     </button>
                   </div>
@@ -240,7 +240,7 @@ export const Signup: React.FC = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <IoMdLock className="text-brightRed dark:text-brightRedLight" />
+                      <IoMdLock className="input-icon" />
                     </div>
                     <input
                       type="password"
@@ -275,7 +275,7 @@ export const Signup: React.FC = () => {
                     Already have an account?
                     <Link
                       to="/login"
-                      className="text-brightRed dark:text-brightRedLight underline ml-2"
+                      className="input-icon underline ml-2"
                     >
                       Log in
                     </Link>

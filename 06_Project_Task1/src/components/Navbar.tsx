@@ -80,6 +80,12 @@ export const Navbar = () => {
             Contact
           </Link>
           <Link
+            to="/formik-signup"
+            className="hover:text-brightRed dark:hover:text-brightRedLight"
+          >
+            Formik Signup
+          </Link>
+          <Link
             to="/default-data"
             className="hover:text-brightRed dark:hover:text-brightRedLight"
           >

@@ -48,4 +48,8 @@ p {
   .input-class{
     @apply bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
   }
+
+  .input-icon {
+    @apply text-brightRed dark:text-brightRedLight
+  }
 }
